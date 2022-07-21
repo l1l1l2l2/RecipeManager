@@ -5,6 +5,7 @@ using RecipeManager.Models;
 using RecipeManager.Pages.Recipes;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RecipeManager.Services
 {
@@ -27,7 +28,7 @@ namespace RecipeManager.Services
                 })
                 .ToList();
         }
-        public void CreateRecipe(InputRecipe inputRecipe, ApplicationUser user)
+        public async Task CreateRecipe(InputRecipe inputRecipe, ApplicationUser user)
         {
             var recipe = new Recipe()
             {
@@ -45,7 +46,7 @@ namespace RecipeManager.Services
                     }).ToList()
             };
             _context.Add(recipe);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

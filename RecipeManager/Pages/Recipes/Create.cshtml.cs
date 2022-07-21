@@ -35,12 +35,12 @@ namespace RecipeManager.Pages.Recipes
         public void OnGet()
         {
         }
-        public async void OnPost()
+        public async Task OnPost()
         {
             if (ModelState.IsValid)
             {
                 var user = await _userManager.GetUserAsync(User);
-                _service.CreateRecipe(Input, user);
+                await _service.CreateRecipe(Input, user);
             }
         }
     }
