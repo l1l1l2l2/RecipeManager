@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RecipeManager.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Recipe> Recipes { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
