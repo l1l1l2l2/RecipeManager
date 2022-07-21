@@ -36,7 +36,7 @@ namespace RecipeManager
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
 
-            services.AddScoped<IRecipeService ,RecipeService>();
+            services.AddScoped<IRecipeService, RecipeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

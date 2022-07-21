@@ -10,11 +10,9 @@ namespace RecipeManager.Services
     public class RecipeService : IRecipeService
     {
         readonly ApplicationDbContext _context;
-        readonly ILogger _logger;
-        public RecipeService(ApplicationDbContext context, ILogger logger)
+        public RecipeService(ApplicationDbContext context)
         {
             _context = context;
-            _logger = logger;
         }
         public List<RecipeSummaryViewModel> GetAllRecipes()
         {

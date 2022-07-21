@@ -17,7 +17,7 @@ namespace RecipeManager.Pages
 
         public List<RecipeSummaryViewModel> Recipes { get; private set; }
 
-        public IndexModel(ILogger<IndexModel> logger, RecipeService service)
+        public IndexModel(ILogger<IndexModel> logger, IRecipeService service)
         {
             _logger = logger;
             _service = service;
