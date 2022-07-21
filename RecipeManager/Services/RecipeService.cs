@@ -1,6 +1,6 @@
 ﻿namespace RecipeManager.Services
 {
-    public class RecipeService
+    public class RecipeService : IRecipeService
     {
     }
 }
