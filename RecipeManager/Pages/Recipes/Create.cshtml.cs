@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using RecipeManager.Data;
 using RecipeManager.Models;
 using RecipeManager.Services;
 using System;
@@ -18,22 +20,28 @@ namespace RecipeManager.Pages.Recipes
     {
         [BindProperty]
         public InputRecipe Input { get; set; }
-        public ILogger<IndexModel> _logger { get; private set; }
-        public IRecipeService _service { get; private set; }
-        public CreateModel(ILogger<IndexModel> logger, IRecipeService service)
+        private readonly ILogger<IndexModel> _logger;
+        private readonly IRecipeService _service;
+        private readonly UserManager<ApplicationUser> _userManager;
+        public CreateModel(
+            ILogger<IndexModel> logger, 
+            IRecipeService service, 
+            UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _service = service;
+            _userManager = userManager;
         }
-
-        
-
         public void OnGet()
         {
         }
-        public void OnPost()
+        public async void OnPost()
         {
-
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                _service.CreateRecipe(Input, user);
+            }
         }
     }
 
