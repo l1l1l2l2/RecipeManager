@@ -48,7 +48,7 @@ namespace RecipeManager.Pages.Recipes
         public string Method { get; set; }
         [DisplayName("Vegetarian")]
         public bool IsVegetarian { get; set; }
-        List<InputIngredient> Ingredients { get; set; } = new List<InputIngredient>();
+        public List<InputIngredient> Ingredients { get; set; } = new List<InputIngredient>();
 
     }
     public class InputIngredient
