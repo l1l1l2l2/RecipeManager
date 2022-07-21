@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using RecipeManager.Models;
 using RecipeManager.Services;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,20 @@ namespace RecipeManager.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly RecipeService _service;
+        private readonly IRecipeService _service;
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger, IRecipeService service)
+        public List<RecipeSummaryViewModel> Recipes { get; private set; }
+
+        public IndexModel(ILogger<IndexModel> logger, RecipeService service)
         {
             _logger = logger;
+            _service = service;
         }
 
         public void OnGet()
         {
-
+            Recipes = _service.GetAllRecipes();
         }
     }
 }
