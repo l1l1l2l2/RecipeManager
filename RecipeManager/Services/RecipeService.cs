@@ -76,5 +76,42 @@ namespace RecipeManager.Services
                 })
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<InputRecipe> GetRecipeForUpdate(int id)
+        {
+            //var recipe = await _context.Recipes
+            //    .FirstOrDefaultAsync(x => x.RecipeId == id); ;
+            //var ingredients = recipe.Ingredients
+            //        .Select(x => new InputIngredient
+            //        {
+            //            Name = x.Name,
+            //            Quantity = x.Quantity,
+            //            Unit = x.Unit
+
+            //        }).ToList();
+            //var recipe = await _context.Recipes
+            //    .Where(x => x.RecipeId == id && !x.IsDeleted)
+            //    .FirstOrDefaultAsync();
+            return await _context.Recipes
+                .Where(x => x.RecipeId == id && !x.IsDeleted)
+                .Select(recipe => new InputRecipe
+                {
+                    Name = recipe.Name,
+                    Method = recipe.Method,
+                    IsVegetarian = recipe.IsVegetarian,
+                    TimeToCookHrs = recipe.TimeToCook.Hours,
+                    TimeToCookMins = recipe.TimeToCook.Minutes,
+                    Ingredients = recipe.Ingredients
+                    .Select(x => new InputIngredient
+                    {
+                        Name = x.Name,
+                        Quantity = x.Quantity,
+                        Unit = x.Unit
+
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+
+        }
     }
 }

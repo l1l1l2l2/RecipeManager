@@ -12,5 +12,6 @@ namespace RecipeManager.Services
         public Task CreateRecipe(InputRecipe inputRecipe, ApplicationUser user);
         public Task<Recipe> GetRecipe(int id);
         public Task<RecipeDetailViewModel> GetRecipeDetail(int id);
+        public Task<InputRecipe> GetRecipeForUpdate(int id);
     }
 }
