@@ -48,5 +48,33 @@ namespace RecipeManager.Services
             _context.Add(recipe);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Recipe> GetRecipe(int id)
+        {
+            return await _context.Recipes
+                .FirstOrDefaultAsync(x => x.RecipeId == id);
+        }
+
+        public async Task<RecipeDetailViewModel> GetRecipeDetail(int id)
+        {
+            return await _context.Recipes
+                .Where(x => !x.IsDeleted && x.RecipeId == id)
+                .Select(x => new RecipeDetailViewModel
+                {
+                    Id = id,
+                    Name = x.Name,
+                    Method = x.Method,
+                    TimeToCook = $"{x.TimeToCook.Hours}hrs {x.TimeToCook.Minutes}min",
+                    ingredients = x.Ingredients
+                        .Select(y => new IngredientSummary
+                        {
+                            Name = y.Name,
+                            Quantity = y.Quantity.ToString(),
+                            Unit = y.Unit
+                        }),
+                    
+                })
+                .FirstOrDefaultAsync();
+        }
     }
 }

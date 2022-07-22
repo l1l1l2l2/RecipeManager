@@ -10,5 +10,7 @@ namespace RecipeManager.Services
     {
         public List<RecipeSummaryViewModel> GetAllRecipes();
         public Task CreateRecipe(InputRecipe inputRecipe, ApplicationUser user);
+        public Task<Recipe> GetRecipe(int id);
+        public Task<RecipeDetailViewModel> GetRecipeDetail(int id);
     }
 }
