@@ -77,9 +77,9 @@
             var rowNo = ingredients.find('tr').length; 
             var template =
                 '<tr>' +
-                '<td><input name="Ingredients[' + rowNo + '].Name" id="Ingredients_' + rowNo + '_Name" /></td>' +
-                '<td><input name="Ingredients[' + rowNo + '].Quantity" id="Ingredients_' + rowNo + 'Quantity" /></td>' +
-                '<td><input name="Ingredients[' + rowNo + '].Unit" id="Ingredients_' + rowNo + 'Unit" /></td>' +
+                '<td><input name="Input.Ingredients[' + rowNo + '].Name" id="Input.Ingredients_' + rowNo + '_Name" /></td>' +
+                '<td><input name="Input.Ingredients[' + rowNo + '].Quantity" id="Input.Ingredients_' + rowNo + 'Quantity" /></td>' +
+                '<td><input name="Input.Ingredients[' + rowNo + '].Unit" id="Input.Ingredients_' + rowNo + 'Unit" /></td>' +
 				//'<td><a href="#" class="remove">Remove</a></td>' +
                 '</tr>';
             ingredients.append(template);
