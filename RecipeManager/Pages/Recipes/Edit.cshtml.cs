@@ -56,7 +56,7 @@ namespace RecipeManager.Pages.Recipes
             if (ModelState.IsValid && _userManager.GetUserId(User) == recipe.CreatedById)
             {
                 var user = await _userManager.GetUserAsync(User);
-                await _service.CreateRecipe(Input, user);
+                await _service.UpdateRecipe(Input, id);
             }
         }
     }

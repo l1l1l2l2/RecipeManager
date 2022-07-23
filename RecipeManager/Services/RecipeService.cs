@@ -113,9 +113,24 @@ namespace RecipeManager.Services
                 .FirstOrDefaultAsync();
 
         }
-        public Task UpdateRecipe(InputRecipe recipe, int id)
+        public async Task UpdateRecipe(InputRecipe inputRecipe, int id)
         {
-            throw new System.NotImplementedException();
+            var recipe = await _context.Recipes
+                .FindAsync(id);
+
+            recipe.Name = inputRecipe.Name;
+            recipe.Method = inputRecipe.Method;
+            recipe.IsVegetarian = inputRecipe.IsVegetarian;
+            recipe.TimeToCook = new System.TimeSpan(inputRecipe.TimeToCookHrs, inputRecipe.TimeToCookMins, 0);
+            recipe.Ingredients = inputRecipe?.Ingredients
+                .Select(x => new Ingredient()
+                {
+                    Name = x.Name,
+                    Quantity = x.Quantity,
+                    Unit = x.Unit
+                }).ToList();
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteRecipe(int id)
