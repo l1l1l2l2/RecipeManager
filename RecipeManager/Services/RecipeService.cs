@@ -113,5 +113,20 @@ namespace RecipeManager.Services
                 .FirstOrDefaultAsync();
 
         }
+        public Task UpdateRecipe(InputRecipe recipe, int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public async Task DeleteRecipe(int id)
+        {
+            var recipe = await _context.Recipes
+                .FindAsync(id);
+            if (recipe is not null) 
+            { 
+                recipe.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
+        }   
     }
 }

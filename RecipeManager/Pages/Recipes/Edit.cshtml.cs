@@ -14,6 +14,7 @@ namespace RecipeManager.Pages.Recipes
     {
         [BindProperty]
         public InputRecipe Input { get; set; }
+        public int Id { get; set; }
         private readonly ILogger<IndexModel> _logger;
         private readonly IRecipeService _service;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -29,6 +30,7 @@ namespace RecipeManager.Pages.Recipes
         public async Task<IActionResult> OnGetAsync(int id)
         {
             var recipe =await _service.GetRecipe(id);
+            Id = id;
             if (_userManager.GetUserId(User) == recipe.CreatedById)
             {
                 Input = await _service.GetRecipeForUpdate(id);
@@ -37,9 +39,21 @@ namespace RecipeManager.Pages.Recipes
 
             return BadRequest();
         }
+        public async Task<IActionResult> OnGetDeleteAsync(int id)
+        {
+            var recipe = await _service.GetRecipe(id);
+            if (_userManager.GetUserId(User) == recipe.CreatedById)
+            {
+                await _service.DeleteRecipe(id);
+                return RedirectToPage("/Index");
+            }
+                return new ForbidResult();
+            
+        }   
         public async Task OnPost(int id)
         {
-            if (ModelState.IsValid)
+            var recipe = await _service.GetRecipe(id);
+            if (ModelState.IsValid && _userManager.GetUserId(User) == recipe.CreatedById)
             {
                 var user = await _userManager.GetUserAsync(User);
                 await _service.CreateRecipe(Input, user);
