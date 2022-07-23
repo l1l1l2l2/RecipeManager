@@ -56,12 +56,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach(var ingredien in Model.Input.Ingredients)
+				@for(int i = 0; i < Model.Input.Ingredients.Count; i++)
 				{
 					<tr>
-					<td><input asp-for="Input.Ingredients[0].Name" value="@ingredien.Name"/></td>
-					<td><input asp-for="Input.Ingredients[0].Quantity" value="@ingredien.Quantity"/></td>
-					<td><input asp-for="Input.Ingredients[0].Unit" value="@ingredien.Unit"/></td>
+					<td><input asp-for="Input.Ingredients[i].Name" value="@Model.Input.Ingredients[i].Name"/></td>
+					<td><input asp-for="Input.Ingredients[i].Quantity" value="@Model.Input.Ingredients[i].Quantity"/></td>
+					<td><input asp-for="Input.Ingredients[i].Unit" value="@Model.Input.Ingredients[i].Unit"/></td>
 					@*TODO: Correct remove
 					<td><a href="#" class="remove">Remove</a></td>*@
 					</tr>
