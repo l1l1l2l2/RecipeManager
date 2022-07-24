@@ -28,7 +28,7 @@ namespace RecipeManager.Services
                 })
                 .ToList();
         }
-        public async Task CreateRecipe(InputRecipe inputRecipe, ApplicationUser user)
+        public async Task<int> CreateRecipe(InputRecipe inputRecipe, ApplicationUser user)
         {
             var recipe = new Recipe()
             {
@@ -47,6 +47,7 @@ namespace RecipeManager.Services
             };
             _context.Add(recipe);
             await _context.SaveChangesAsync();
+            return recipe.RecipeId;
         }
 
         public async Task<Recipe> GetRecipe(int id)

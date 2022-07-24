@@ -31,7 +31,7 @@ namespace RecipeManager.Pages.Recipes
         {
             var recipe =await _service.GetRecipe(id);
             Id = id;
-            if (_userManager.GetUserId(User) == recipe.CreatedById)
+            if (_userManager.GetUserId(User) == recipe?.CreatedById)
             {
                 Input = await _service.GetRecipeForUpdate(id);
                 return Page();
@@ -42,7 +42,7 @@ namespace RecipeManager.Pages.Recipes
         public async Task<IActionResult> OnGetDeleteAsync(int id)
         {
             var recipe = await _service.GetRecipe(id);
-            if (_userManager.GetUserId(User) == recipe.CreatedById)
+            if (_userManager.GetUserId(User) == recipe?.CreatedById)
             {
                 await _service.DeleteRecipe(id);
                 return RedirectToPage("/Index");
@@ -53,7 +53,7 @@ namespace RecipeManager.Pages.Recipes
         public async Task OnPost(int id)
         {
             var recipe = await _service.GetRecipe(id);
-            if (ModelState.IsValid && _userManager.GetUserId(User) == recipe.CreatedById)
+            if (ModelState.IsValid && _userManager.GetUserId(User) == recipe?.CreatedById)
             {
                 var user = await _userManager.GetUserAsync(User);
                 await _service.UpdateRecipe(Input, id);

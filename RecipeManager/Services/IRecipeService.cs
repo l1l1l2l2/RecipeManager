@@ -9,7 +9,7 @@ namespace RecipeManager.Services
     public interface IRecipeService
     {
         public List<RecipeSummaryViewModel> GetAllRecipes();
-        public Task CreateRecipe(InputRecipe inputRecipe, ApplicationUser user);
+        public Task<int> CreateRecipe(InputRecipe inputRecipe, ApplicationUser user);
         public Task<Recipe> GetRecipe(int id);
         public Task<RecipeDetailViewModel> GetRecipeDetail(int id);
         public Task<InputRecipe> GetRecipeForUpdate(int id);
