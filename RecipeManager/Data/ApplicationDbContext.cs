@@ -8,10 +8,12 @@ namespace RecipeManager.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Ingredient> Ingredients { get; set;}
         public DbSet<Recipe> Recipes { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
     }
 }

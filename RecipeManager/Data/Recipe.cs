@@ -12,6 +12,6 @@ namespace RecipeManager.Data
         public string Method { get; set; }
         public bool IsVegetarian { get; set; }
         public string CreatedById { get; set; }
-        public ICollection<Ingredient> Ingredients { get; set;}
+        public virtual ICollection<Ingredient> Ingredients { get; set;}
     }
 }
