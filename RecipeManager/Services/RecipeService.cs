@@ -115,25 +115,10 @@ namespace RecipeManager.Services
         }
         public async Task UpdateRecipe(InputRecipe inputRecipe, int id)
         {
-            //var iRecipe = new Recipe()
-            //{
-            //    Name = inputRecipe.Name,
-            //    Method = inputRecipe.Method,
-            //    IsVegetarian = inputRecipe.IsVegetarian,
-            //    TimeToCook = new System.TimeSpan(inputRecipe.TimeToCookHrs, inputRecipe.TimeToCookMins, 0),
-            //    Ingredients = inputRecipe?.Ingredients
-            //    .Select(x => new Ingredient()
-            //    {
-            //        Name = x.Name,
-            //        Quantity = x.Quantity,
-            //        Unit = x.Unit
-            //    }).ToList()
-            //};
-
-
-            var recipe = await _context.Recipes.Where(x => x.RecipeId == id && !x.IsDeleted).Include(x=> x.Ingredients).FirstOrDefaultAsync();
-            //var recipe = await _context.Recipes
-            //    .FindAsync(id);
+            var recipe = await _context.Recipes
+                .Where(x => x.RecipeId == id && !x.IsDeleted)
+                .Include(x=> x.Ingredients)
+                .FirstOrDefaultAsync();
 
 
             recipe.Name = inputRecipe.Name;
