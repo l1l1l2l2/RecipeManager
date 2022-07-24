@@ -47,17 +47,18 @@ namespace RecipeManager.Pages.Recipes
                 await _service.DeleteRecipe(id);
                 return RedirectToPage("/Index");
             }
-                return new ForbidResult();
+            return new ForbidResult();
             
         }   
-        public async Task OnPost(int id)
+        public async Task<IActionResult> OnPost(int id)
         {
             var recipe = await _service.GetRecipe(id);
             if (ModelState.IsValid && _userManager.GetUserId(User) == recipe?.CreatedById)
             {
-                var user = await _userManager.GetUserAsync(User);
                 await _service.UpdateRecipe(Input, id);
+                return RedirectToPage("Index", new { id = id });
             }
+            return Page();
         }
     }
 }
