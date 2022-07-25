@@ -61,6 +61,7 @@
 					<tr>
 					<td><input asp-for="Input.Ingredients[i].Name" value="@Model.Input.Ingredients[i].Name"/></td>
 					<td><input asp-for="Input.Ingredients[i].Quantity" value="@Model.Input.Ingredients[i].Quantity"/></td>
+					<span asp-validation-for="Input.Ingredients[i].Quantity" class="text-danger"></span>
 					<td><input asp-for="Input.Ingredients[i].Unit" value="@Model.Input.Ingredients[i].Unit"/></td>
 					@*TODO: Correct remove
 					<td><a href="#" class="remove">Remove</a></td>*@

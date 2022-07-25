@@ -66,8 +66,7 @@ namespace RecipeManager.Pages.Recipes
     {
         [Required, StringLength(100)]
         public string Name { get; set; }
-        [Range(0, int.MaxValue)]
-        public decimal Quantity { get; set; }
+        public float Quantity { get; set; }
         [StringLength(20)]
         public string Unit { get; set; }
     }
