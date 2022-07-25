@@ -147,6 +147,12 @@ namespace RecipeManager.Services
                 recipe.IsDeleted = true;
                 await _context.SaveChangesAsync();
             }
-        }   
+        }
+
+        public async Task<string> GetCreatorId(int id)
+        {
+            var recipe = await _context.Recipes.FindAsync(id);
+            return recipe.CreatedById;
+        }
     }
 }

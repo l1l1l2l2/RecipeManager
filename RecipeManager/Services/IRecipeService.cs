@@ -15,5 +15,6 @@ namespace RecipeManager.Services
         public Task<InputRecipe> GetRecipeForUpdate(int id);
         public Task UpdateRecipe(InputRecipe inputRecipe ,int id);
         public Task DeleteRecipe(int id);
+        public Task<string> GetCreatorId(int id);
     }
 }

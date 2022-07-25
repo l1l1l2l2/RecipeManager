@@ -13,3 +13,8 @@
 }
 
 <p>@Model.Recipe.Method</p>
+
+@if (Model.CanEditRecipe)
+{
+    <a asp-page="Edit" asp-route-id="@Model.Recipe.Id" class="btn btn-primary">Edit</a>
+}
