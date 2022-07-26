@@ -10,4 +10,10 @@ namespace RecipeManager.Models
         public string Method { get; set; }
         public IEnumerable<IngredientSummary> ingredients { get; set; }
     }
+    public class IngredientSummary
+    {
+        public string Name { get; set; }
+        public string Quantity { get; set; }
+        public string Unit { get; set; }
+    }
 }
