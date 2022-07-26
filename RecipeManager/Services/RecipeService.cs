@@ -16,7 +16,7 @@ namespace RecipeManager.Services
         {
             _context = context;
         }
-        public List<RecipeSummaryViewModel> GetAllRecipes()
+        public Task<List<RecipeSummaryViewModel>> GetAllRecipes()
         {
             return _context.Recipes
                 .Where(x => !x.IsDeleted)
@@ -26,7 +26,7 @@ namespace RecipeManager.Services
                     Name = x.Name,
                     TimeToCook = $"{x.TimeToCook.Hours}hrs {x.TimeToCook.Minutes}mins"
                 })
-                .ToList();
+                .ToListAsync();
         }
         public async Task<int> CreateRecipe(InputRecipe inputRecipe, ApplicationUser user)
         {

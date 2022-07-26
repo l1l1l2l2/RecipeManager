@@ -23,9 +23,10 @@ namespace RecipeManager.Pages
             _service = service;
         }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            Recipes = _service.GetAllRecipes();
+            Recipes = await _service.GetAllRecipes();
+            return Page();
         }
     }
 }
