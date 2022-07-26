@@ -1,0 +1,6 @@
+﻿@page
+@model RecipeManager.Pages.MyRecipesModel
+
+<a asp-page="Recipes/Create" class="btn-primary btn mb-md-1">Add Recipe</a>
+
+<partial name="_RecipesPartial" model="@Model.Recipes"/>

@@ -154,5 +154,18 @@ namespace RecipeManager.Services
             var recipe = await _context.Recipes.FindAsync(id);
             return recipe.CreatedById;
         }
+
+        public async Task<List<RecipeSummaryViewModel>> GetUserRecipes(string userId)
+        {
+            return await _context.Recipes
+                .Where(x => !x.IsDeleted && x.CreatedById == userId)
+                .Select(x => new RecipeSummaryViewModel
+                {
+                    Id = x.RecipeId,
+                    Name = x.Name,
+                    TimeToCook = $"{x.TimeToCook.Hours}hrs {x.TimeToCook.Minutes}mins"
+                })
+                .ToListAsync();
+        }
     }
 }
