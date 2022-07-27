@@ -3,71 +3,9 @@
 @{
 	ViewData["Title"] = "Create Recipe";
 }
-<form method="post" class="form-horizontal">
-	<div class="form-group">
-		<label asp-for="Input.Name" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<input asp-for="Input.Name" class="form-control" />
-			<span asp-validation-for="Input.Name" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label asp-for="Input.TimeToCookHrs" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<input asp-for="Input.TimeToCookHrs" class="form-control"/>
-			<span asp-validation-for="Input.TimeToCookHrs" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label asp-for="Input.TimeToCookMins" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<input asp-for="Input.TimeToCookMins" class="form-control"/>
-			<span asp-validation-for="Input.TimeToCookMins" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label asp-for="Input.Method" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<textarea asp-for="Input.Method" class="form-control"></textarea>
-			<span asp-validation-for="Input.Method" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<div class="checkbox">
-				<label class="control-label">
-					<input asp-for="Input.IsVegetarian"/> Vegetarian?
-					<span asp-validation-for="Input.IsVegetarian" class="text-danger"></span>
-				</label>
-			</div>
-		</div>
-	</div>
 
-
-
-	<div class="form-group">
-		<table class="table" id="ingredients">
-			<thead>
-				<tr>
-					<th>Ingridient</th>
-					<th>Quantity</th>
-					<th>Unit</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-
-			</tbody>
-		</table>
-	</div>
-
-	<div class="form-group">
-		<div class="col-md-offset-2 col-md-10">
-			<button type="button" class="btn btn-success" id="addIngredient">Add ingredient</button>
-			<button type="submit" class="btn btn-primary">Create</button>
-		</div>
-	</div>
-</form>
+<partial name="_RecipeFormPartial" model="@Model.Input">
+	
 
 @section Scripts{
 	<partial name="_ValidationScriptsPartial" />
@@ -77,9 +15,9 @@
             var rowNo = ingredients.find('tr').length; 
             var template =
                 '<tr>' +
-                '<td><input name="Input.Ingredients[' + rowNo + '].Name" id="Input.Ingredients_' + rowNo + '_Name" /></td>' +
-                '<td><input name="Input.Ingredients[' + rowNo + '].Quantity" id="Input.Ingredients_' + rowNo + 'Quantity" /></td>' +
-                '<td><input name="Input.Ingredients[' + rowNo + '].Unit" id="Input.Ingredients_' + rowNo + 'Unit" /></td>' +
+                '<td><input name="Ingredients[' + rowNo + '].Name" id="Ingredients_' + rowNo + '_Name" /></td>' +
+                '<td><input name="Ingredients[' + rowNo + '].Quantity" id="Ingredients_' + rowNo + '_Quantity" /></td>' +
+                '<td><input name="Ingredients[' + rowNo + '].Unit" id="Ingredients_' + rowNo + '_Unit" /></td>' +
 				//TODO: Correct remove if adding after remove
 				//'<td><a href="#" class="remove">Remove</a></td>' +
                 '</tr>';

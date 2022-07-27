@@ -3,82 +3,8 @@
 @{
 	ViewData["Title"] = "Edit recipe";
 }
-<form method="post" class="form-horizontal">
-	<div class="form-group">
-		<label asp-for="Input.Name" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<input asp-for="Input.Name" class="form-control" value="@Model.Input.Name"/>
-			<span asp-validation-for="Input.Name" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label asp-for="Input.TimeToCookHrs" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<input asp-for="Input.TimeToCookHrs" class="form-control" value="@Model.Input.TimeToCookHrs"/>
-			<span asp-validation-for="Input.TimeToCookHrs" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label asp-for="Input.TimeToCookMins" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<input asp-for="Input.TimeToCookMins" class="form-control" value="@Model.Input.TimeToCookMins"/>
-			<span asp-validation-for="Input.TimeToCookMins" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<label asp-for="Input.Method" class="col-md-2 control-label"></label>
-		<div class="col-md-10">
-			<textarea asp-for="Input.Method" class="form-control">@Model.Input.Method</textarea>
-			<span asp-validation-for="Input.Method" class="text-danger"></span>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-sm-offset-2 col-sm-10">
-			<div class="checkbox">
-				<label class="control-label">
-					<input asp-for="Input.IsVegetarian" value="@Model.Input.IsVegetarian"/> Vegetarian?
-					<span asp-validation-for="Input.IsVegetarian" class="text-danger"></span>
-				</label>
-			</div>
-		</div>
-	</div>
-
-
-
-	<div class="form-group">
-		<table class="table" id="ingredients">
-			<thead>
-				<tr>
-					<th>Ingridient</th>
-					<th>Quantity</th>
-					<th>Unit</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				@for(int i = 0; i < Model.Input.Ingredients.Count; i++)
-				{
-					<tr>
-					<td><input asp-for="Input.Ingredients[i].Name" value="@Model.Input.Ingredients[i].Name"/></td>
-					<td><input asp-for="Input.Ingredients[i].Quantity" value="@Model.Input.Ingredients[i].Quantity"/></td>
-					<span asp-validation-for="Input.Ingredients[i].Quantity" class="text-danger"></span>
-					<td><input asp-for="Input.Ingredients[i].Unit" value="@Model.Input.Ingredients[i].Unit"/></td>
-					@*TODO: Correct remove
-					<td><a href="#" class="remove">Remove</a></td>*@
-					</tr>
-				}
-			</tbody>
-		</table>
-	</div>
-
-	<div class="form-group">
-		<div class="col-md-offset-2 col-md-10">
-			<button type="button" class="btn btn-success" id="addIngredient">Add ingredient</button>
-			<button type="submit" class="btn btn-primary">Update</button>
-			<a asp-page-handler="Delete" asp-route-id="@Model.Id" class="btn btn-danger float-right" >Delete</a>
-		</div>
-	</div>
-</form>
+<partial name="_RecipeFormPartial" model="@Model.Input">
+	
 
 @section Scripts{
 	<partial name="_ValidationScriptsPartial" />
@@ -88,9 +14,9 @@
             var rowNo = ingredients.find('tr').length; 
             var template =
                 '<tr>' +
-                '<td><input name="Input.Ingredients[' + rowNo + '].Name" id="Input.Ingredients_' + rowNo + '_Name" /></td>' +
-                '<td><input name="Input.Ingredients[' + rowNo + '].Quantity" id="Input.Ingredients_' + rowNo + 'Quantity" /></td>' +
-                '<td><input name="Input.Ingredients[' + rowNo + '].Unit" id="Input.Ingredients_' + rowNo + 'Unit" /></td>' +
+                '<td><input name="Ingredients[' + rowNo + '].Name" id="Ingredients_' + rowNo + '_Name" /></td>' +
+                '<td><input name="Ingredients[' + rowNo + '].Quantity" id="Ingredients_' + rowNo + '_Quantity" /></td>' +
+                '<td><input name="Ingredients[' + rowNo + '].Unit" id="Ingredients_' + rowNo + '_Unit" /></td>' +
 				//TODO: Correct remove if adding after remove
 				//'<td><a href="#" class="remove">Remove</a></td>' +
                 '</tr>';

@@ -19,7 +19,7 @@ namespace RecipeManager.Pages.Recipes
     public class CreateModel : PageModel
     {
         [BindProperty]
-        public InputRecipe Input { get; set; }
+        public InputRecipe Input { get; set; } = new InputRecipe();
         private readonly ILogger<IndexModel> _logger;
         private readonly IRecipeService _service;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -51,7 +51,8 @@ namespace RecipeManager.Pages.Recipes
     public class InputRecipe
     {
         [Required]
-        public string Name { get; set; }
+        [DisplayName("Name")]
+        public string RecipeName { get; set; }
         [Range(0, 24), DisplayName("Time to cook (hrs)")]
         public int TimeToCookHrs { get; set; }
         [Range(0, 59), DisplayName("Time to cook (mins)")]

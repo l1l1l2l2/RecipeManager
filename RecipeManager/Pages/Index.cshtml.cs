@@ -24,7 +24,7 @@ namespace RecipeManager.Pages
         }
 
         public async Task<IActionResult> OnGet()
-        {
+        { 
             Recipes = await _service.GetAllRecipes();
             return Page();
         }

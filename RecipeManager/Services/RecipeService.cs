@@ -33,7 +33,7 @@ namespace RecipeManager.Services
             var recipe = new Recipe()
             {
                 CreatedById = user.Id,
-                Name = inputRecipe.Name,
+                Name = inputRecipe.RecipeName,
                 Method = inputRecipe.Method,
                 IsVegetarian = inputRecipe.IsVegetarian,
                 TimeToCook = new System.TimeSpan(inputRecipe.TimeToCookHrs, inputRecipe.TimeToCookMins, 0),
@@ -97,7 +97,7 @@ namespace RecipeManager.Services
                 .Where(x => x.RecipeId == id && !x.IsDeleted)
                 .Select(recipe => new InputRecipe
                 {
-                    Name = recipe.Name,
+                    RecipeName = recipe.Name,
                     Method = recipe.Method,
                     IsVegetarian = recipe.IsVegetarian,
                     TimeToCookHrs = recipe.TimeToCook.Hours,
@@ -122,7 +122,7 @@ namespace RecipeManager.Services
                 .FirstOrDefaultAsync();
 
 
-            recipe.Name = inputRecipe.Name;
+            recipe.Name = inputRecipe.RecipeName;
             recipe.Method = inputRecipe.Method;
             recipe.IsVegetarian = inputRecipe.IsVegetarian;
             recipe.TimeToCook = new System.TimeSpan(inputRecipe.TimeToCookHrs, inputRecipe.TimeToCookMins, 0);
