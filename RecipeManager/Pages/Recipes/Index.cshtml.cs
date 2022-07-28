@@ -28,7 +28,7 @@ namespace RecipeManager.Pages.Recipes
             _userManager = userManager;
         }
 
-     
+
 
         public async Task<IActionResult> OnGetAsync(int id)
         {

@@ -29,7 +29,7 @@ namespace RecipeManager.Pages.Recipes
         }
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var recipe =await _service.GetRecipe(id);
+            var recipe = await _service.GetRecipe(id);
             Id = id;
             if (_userManager.GetUserId(User) == recipe?.CreatedById)
             {
@@ -48,8 +48,8 @@ namespace RecipeManager.Pages.Recipes
                 return RedirectToPage("/Index");
             }
             return new ForbidResult();
-            
-        }   
+
+        }
         public async Task<IActionResult> OnPost(int id)
         {
             var recipe = await _service.GetRecipe(id);

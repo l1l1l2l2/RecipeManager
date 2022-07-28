@@ -24,8 +24,8 @@ namespace RecipeManager.Pages.Recipes
         private readonly IRecipeService _service;
         private readonly UserManager<ApplicationUser> _userManager;
         public CreateModel(
-            ILogger<IndexModel> logger, 
-            IRecipeService service, 
+            ILogger<IndexModel> logger,
+            IRecipeService service,
             UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
@@ -41,7 +41,7 @@ namespace RecipeManager.Pages.Recipes
             {
                 var user = await _userManager.GetUserAsync(User);
                 var id = await _service.CreateRecipe(Input, user);
-                return RedirectToPage("Index", new {id = id});
+                return RedirectToPage("Index", new { id = id });
             }
             // TODO: log
             return Page();

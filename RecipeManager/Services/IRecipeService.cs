@@ -13,9 +13,9 @@ namespace RecipeManager.Services
         public Task<Recipe> GetRecipe(int id);
         public Task<RecipeDetailViewModel> GetRecipeDetail(int id);
         public Task<InputRecipe> GetRecipeForUpdate(int id);
-        public Task UpdateRecipe(InputRecipe inputRecipe ,int id);
+        public Task UpdateRecipe(InputRecipe inputRecipe, int id);
         public Task DeleteRecipe(int id);
         public Task<string> GetCreatorId(int id);
-        public Task<List<RecipeSummaryViewModel>> GetUserRecipes(string userId);  
+        public Task<List<RecipeSummaryViewModel>> GetUserRecipes(string userId);
     }
 }

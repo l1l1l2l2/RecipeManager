@@ -2,19 +2,19 @@
 @model RecipeManager.Pages.Recipes.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "Index";
 }
 
 <h1>@Model.Recipe.Name</h1>
 <p><b>@Model.Recipe.TimeToCook</b></p>
-@foreach(var ingredient in Model.Recipe.ingredients)
+@foreach (var ingredient in Model.Recipe.ingredients)
 {
-    <p><b>@ingredient.Name @ingredient.Quantity@ingredient.Unit</b></p>
+	<p><b>@ingredient.Name @ingredient.Quantity@ingredient.Unit</b></p>
 }
 
 <p>@Model.Recipe.Method</p>
 
 @if (Model.CanEditRecipe)
 {
-    <a asp-page="Edit" asp-route-id="@Model.Recipe.Id" class="btn btn-primary">Edit</a>
+	<a asp-page="Edit" asp-route-id="@Model.Recipe.Id" class="btn btn-primary">Edit</a>
 }

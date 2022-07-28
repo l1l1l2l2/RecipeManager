@@ -73,7 +73,7 @@ namespace RecipeManager.Services
                             Quantity = y.Quantity.ToString(),
                             Unit = y.Unit
                         }),
-                    
+
                 })
                 .FirstOrDefaultAsync();
         }
@@ -118,7 +118,7 @@ namespace RecipeManager.Services
         {
             var recipe = await _context.Recipes
                 .Where(x => x.RecipeId == id && !x.IsDeleted)
-                .Include(x=> x.Ingredients)
+                .Include(x => x.Ingredients)
                 .FirstOrDefaultAsync();
 
 
@@ -142,8 +142,8 @@ namespace RecipeManager.Services
         {
             var recipe = await _context.Recipes
                 .FindAsync(id);
-            if (recipe is not null) 
-            { 
+            if (recipe is not null)
+            {
                 recipe.IsDeleted = true;
                 await _context.SaveChangesAsync();
             }

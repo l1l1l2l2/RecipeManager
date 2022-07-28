@@ -1,14 +1,14 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Recipes";
+	ViewData["Title"] = "Recipes";
 }
 
 <a asp-page="Recipes/Create" class="btn-primary btn mb-md-1">Add Recipe</a>
 @if (Model.User.Identity.IsAuthenticated)
 {
-    <a asp-page="MyRecipes" class="btn-primary btn mb-md-1">MyRecipes</a>
+	<a asp-page="MyRecipes" class="btn-primary btn mb-md-1">MyRecipes</a>
 }
 
 
-<partial name="_RecipesPartial" model="@Model.Recipes"/>
+<partial name="_RecipesPartial" model="@Model.Recipes" />

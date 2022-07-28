@@ -5,27 +5,27 @@
 }
 
 <partial name="_RecipeFormPartial" model="@Model.Input">
-	
 
-@section Scripts{
+
+	@section Scripts{
 	<partial name="_ValidationScriptsPartial" />
-    <script>
-        var ingredients = $('#ingredients tbody');
-        $("#addIngredient").click(function () {
-            var rowNo = ingredients.find('tr').length; 
-            var template =
-                '<tr>' +
-                '<td><input name="Ingredients[' + rowNo + '].Name" id="Ingredients_' + rowNo + '_Name" /></td>' +
-                '<td><input name="Ingredients[' + rowNo + '].Quantity" id="Ingredients_' + rowNo + '_Quantity" /></td>' +
-                '<td><input name="Ingredients[' + rowNo + '].Unit" id="Ingredients_' + rowNo + '_Unit" /></td>' +
+	<script>
+		var ingredients = $('#ingredients tbody');
+		$("#addIngredient").click(function () {
+			var rowNo = ingredients.find('tr').length;
+			var template =
+				'<tr>' +
+				'<td><input name="Ingredients[' + rowNo + '].Name" id="Ingredients_' + rowNo + '_Name" /></td>' +
+				'<td><input name="Ingredients[' + rowNo + '].Quantity" id="Ingredients_' + rowNo + '_Quantity" /></td>' +
+				'<td><input name="Ingredients[' + rowNo + '].Unit" id="Ingredients_' + rowNo + '_Unit" /></td>' +
 				//TODO: Correct remove if adding after remove
 				//'<td><a href="#" class="remove">Remove</a></td>' +
-                '</tr>';
-            ingredients.append(template);
-        });
+				'</tr>';
+			ingredients.append(template);
+		});
 
-        ingredients.on('click', '.remove', function (e) {
-            $(this).closest('tr').remove();
-        });
-    </script>
-}
+		ingredients.on('click', '.remove', function (e) {
+			$(this).closest('tr').remove();
+		});
+	</script>
+	}
