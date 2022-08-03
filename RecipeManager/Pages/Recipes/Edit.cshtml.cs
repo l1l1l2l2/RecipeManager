@@ -36,6 +36,7 @@ namespace RecipeManager.Pages.Recipes
             var recipe = await _service.GetRecipe(id);
             if (recipe is null)
             {
+                _logger.LogWarning($"Could not find recipe with id {id}");
                 return NotFound();
             }
 
@@ -51,6 +52,11 @@ namespace RecipeManager.Pages.Recipes
         {
             var recipe = await _service.GetRecipe(id);
             var authResult = await _authService.AuthorizeAsync(User, recipe, "CanManageRecipe");
+            if (recipe is null)
+            {
+                _logger.LogWarning($"Could not find recipe with id {id}");
+                return NotFound();
+            }
             if (authResult.Succeeded)
             {
                 await _service.DeleteRecipe(id);
@@ -62,6 +68,11 @@ namespace RecipeManager.Pages.Recipes
         public async Task<IActionResult> OnPost(int id)
         {
             var recipe = await _service.GetRecipe(id);
+            if (recipe is null)
+            {
+                _logger.LogWarning($"Could not find recipe with id {id}");
+                return NotFound();
+            }
             var authResult = await _authService.AuthorizeAsync(User, recipe, "CanManageRecipe");
             if (ModelState.IsValid && authResult.Succeeded)
             {

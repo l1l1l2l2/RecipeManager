@@ -39,7 +39,7 @@ namespace RecipeManager.Pages.Recipes
 
             if (Recipe is null)
             {
-                _logger.LogWarning(12, "Could not find recipe with id {RecipeId}", id);
+                _logger.LogWarning($"Could not find recipe with id {id}");
                 return NotFound();
             }
             var recipe = await _service.GetRecipe(id);
