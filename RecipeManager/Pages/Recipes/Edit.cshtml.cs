@@ -30,6 +30,7 @@ namespace RecipeManager.Pages.Recipes
             _userManager = userManager;
             _authService = authService;
         }
+        //TODO: Move common logic to filters
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Id = id;
