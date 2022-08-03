@@ -3,6 +3,4 @@
 namespace RecipeManager.Authorization
 {
     public class IsRecipeOwnerRequirement : IAuthorizationRequirement { }
-    {
-    }
 }

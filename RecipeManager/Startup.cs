@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RecipeManager.Authorization;
 using RecipeManager.Data;
 using RecipeManager.Services;
 using System;
@@ -37,6 +39,15 @@ namespace RecipeManager
             services.AddRazorPages();
 
             services.AddScoped<IRecipeService, RecipeService>();
+
+            services.AddScoped<IAuthorizationHandler, IsRecipeOwnerHandler>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("CanManageRecipe",
+                    policyBuilder => policyBuilder
+                        .AddRequirements(new IsRecipeOwnerRequirement()));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,32 +17,41 @@ namespace RecipeManager.Pages.Recipes
         public int Id { get; set; }
         private readonly ILogger<IndexModel> _logger;
         private readonly IRecipeService _service;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager; 
+        private readonly IAuthorizationService _authService;
         public EditModel(
             ILogger<IndexModel> logger,
             IRecipeService service,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IAuthorizationService authService)
         {
             _logger = logger;
             _service = service;
             _userManager = userManager;
+            _authService = authService;
         }
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var recipe = await _service.GetRecipe(id);
             Id = id;
-            if (_userManager.GetUserId(User) == recipe?.CreatedById)
+            var recipe = await _service.GetRecipe(id);
+            if (recipe is null)
+            {
+                return NotFound();
+            }
+
+            var authResult = await _authService.AuthorizeAsync(User, recipe, "CanManageRecipe");
+            if (authResult.Succeeded)
             {
                 Input = await _service.GetRecipeForUpdate(id);
                 return Page();
             }
-
             return BadRequest();
         }
         public async Task<IActionResult> OnGetDeleteAsync(int id)
         {
             var recipe = await _service.GetRecipe(id);
-            if (_userManager.GetUserId(User) == recipe?.CreatedById)
+            var authResult = await _authService.AuthorizeAsync(User, recipe, "CanManageRecipe");
+            if (authResult.Succeeded)
             {
                 await _service.DeleteRecipe(id);
                 return RedirectToPage("/Index");
@@ -53,10 +62,11 @@ namespace RecipeManager.Pages.Recipes
         public async Task<IActionResult> OnPost(int id)
         {
             var recipe = await _service.GetRecipe(id);
-            if (ModelState.IsValid && _userManager.GetUserId(User) == recipe?.CreatedById)
+            var authResult = await _authService.AuthorizeAsync(User, recipe, "CanManageRecipe");
+            if (ModelState.IsValid && authResult.Succeeded)
             {
                 await _service.UpdateRecipe(Input, id);
-                return RedirectToPage("Index", new { id = id });
+                return RedirectToPage("Index", new { id });
             }
             return Page();
         }
